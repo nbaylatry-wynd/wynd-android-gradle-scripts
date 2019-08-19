@@ -1,0 +1,54 @@
+allprojects {
+    project.ext {
+        //Android 
+        compileSdkVersion = 28
+        buildToolsVersion = '28.0.3'
+        minSdkVersion = 22
+        targetSdkVersion = 28
+
+        // Wynd dependencies
+        device = '1.6.1'
+        firebasemonitoringVersion = "1.1.3"
+        updater = '1.1.2'
+        wyndFrameworkVersion = '2.2.0'
+        featuresVersion = "4.4.17"
+
+        // Common dependencies
+        kotlin = '1.3.41'
+        dokka = '0.9.17'
+        rxandroidVersion = '2.1.1'
+        retrofit = '2.5.0'
+        rxbinding = '2.1.1'
+        gsonVersion = '2.8.5'
+        ormLite = '5.1'
+        butterknife = '10.1.0'
+        joda = '2.10.1'
+        glide = '4.9.0'
+        stetho = '1.5.1'
+
+        // Testing
+        jacocoVersion = '0.8.4'
+        kluent = '1.52'
+        assertj = '3.12.2'
+        junit = '4.12'
+        mockito = '3.0.0'
+        mockitokotlin = '2.1.0'
+        robolectric = '4.3'
+        xtestcore = '1.2.0'
+        xjunit = '1.1.1'
+        xrunner = '1.2.0'
+        xespresso = "3.2.0"
+
+        // Android X
+        constraintlayout = '2.0.0-beta2'
+        lifecycle = '2.2.0-alpha02'
+        palette = '1.0.0'
+        fragment = '1.1.0-alpha04'
+        appcompat = '1.1.0-rc01'
+        legacy = '1.0.0'
+        cardview = '1.0.0'
+        preference = '1.1.0-alpha01'
+        material = '1.1.0-alpha08'
+        recyclerview = '1.0.0'
+    }
+}
