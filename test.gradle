@@ -1,0 +1,48 @@
+android {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+}
+
+dependencies {
+    testImplementation "junit:junit:$junit"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "org.mockito:mockito-inline:$mockito"
+    testImplementation "org.assertj:assertj-core:$assertj"
+    testImplementation "org.robolectric:robolectric:$robolectric"
+    testImplementation "org.amshove.kluent:kluent:$kluent"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitokotlin"
+    testImplementation "androidx.test:core:$xtestcore"
+    testImplementation "androidx.test.ext:junit:$xjunit"
+
+    androidTestImplementation "androidx.test:runner:$xrunner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$xespresso"
+}
+
+def testTaskName = "testDebugUnitTest"
+task "${testTaskName}Coverage"(type: JacocoReport, dependsOn: "$testTaskName") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports on the debug build."
+    classDirectories.from = files(fileTree(
+            dir: "${project.buildDir}/intermediates/javac/debug",
+            excludes: ['**/R.class', '**/R$*.class', '**/*$ViewInjector*.*', '**/BuildConfig.*', '**/Manifest*.*']),
+            fileTree(
+                    dir: "${project.buildDir}/tmp/kotlin-classes/debug",
+                    excludes: ['**/R.class', '**/R$*.class', '**/*$ViewInjector*.*', '**/BuildConfig.*', '**/Manifest*.*'])
+    )
+    def coverageSourceDirs = [
+            "src/main/java",
+            "src/main/kotlin"
+    ]
+    additionalSourceDirs.from = files(coverageSourceDirs)
+    sourceDirectories.from = files(coverageSourceDirs)
+    executionData.from = files("${project.buildDir}/jacoco/${testTaskName}.exec")
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
