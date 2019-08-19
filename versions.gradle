@@ -8,18 +8,18 @@ allprojects {
 
         // Wynd dependencies
         device = '1.6.1'
-        firebasemonitoringVersion = "1.1.3"
+        firebasemonitoring = "1.1.3"
         updater = '1.1.2'
-        wyndFrameworkVersion = '2.2.0'
-        featuresVersion = "4.4.17"
+        framework = '2.2.1'
+        features = "4.4.17"
 
         // Common dependencies
         kotlin = '1.3.41'
         dokka = '0.9.17'
-        rxandroidVersion = '2.1.1'
+        rxandroid = '2.1.1'
         retrofit = '2.5.0'
         rxbinding = '2.1.1'
-        gsonVersion = '2.8.5'
+        gson = '2.8.5'
         ormLite = '5.1'
         butterknife = '10.1.0'
         joda = '2.10.1'
@@ -27,7 +27,7 @@ allprojects {
         stetho = '1.5.1'
 
         // Testing
-        jacocoVersion = '0.8.4'
+        jacoco = '0.8.4'
         kluent = '1.52'
         assertj = '3.12.2'
         junit = '4.12'
