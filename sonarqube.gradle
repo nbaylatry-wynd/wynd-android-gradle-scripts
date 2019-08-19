@@ -1,0 +1,5 @@
+task sonarComplete(type: Exec) {
+    workingDir "./"
+    def command = "$project.rootDir/gradlew"
+    commandLine command, "lintDebug", "testDebugUnitTestCoverage", "sonarqube"
+}
