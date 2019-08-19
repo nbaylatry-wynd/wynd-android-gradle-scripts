@@ -1,0 +1,35 @@
+apply plugin: 'maven'
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives androidSourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "${nexusUrl}/repository/maven-releases/") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            snapshotRepository(url: "${nexusUrl}/repository/maven-snapshots") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+
+            pom.groupId = project.groupId
+            pom.artifactId = project.name
+            pom.version = project.versionName
+            pom.whenConfigured { pom ->
+                pom.dependencies.each { dep ->
+                    if (dep.getVersion() == "unspecified" && dep.getGroupId() == project.rootDir.name) {
+                        dep.setGroupId(project.groupId)
+                        dep.setVersion(project.versionName)
+                    }
+                }
+            }
+        }
+    }
+}
