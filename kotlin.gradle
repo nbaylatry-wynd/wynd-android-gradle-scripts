@@ -1,0 +1,19 @@
+apply plugin: 'org.jetbrains.dokka-android'
+
+android {
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitokotlin"
+    testImplementation "org.amshove.kluent:kluent-android:$kluent"
+}
+
+dokka {
+    outputFormat = 'javadoc'
+    outputDirectory = "$project.rootDir/utils/javadoc"
+}
