@@ -1,0 +1,23 @@
+def testTaskName = "testWyndDebugUnitTest"
+task "${testTaskName}Coverage"(type: JacocoReport, dependsOn: "$testTaskName") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports on the debug build."
+    classDirectories.from = files(fileTree(
+            dir: "${project.buildDir}/intermediates/javac/wyndDebug",
+            excludes: ['**/R.class', '**/R$*.class', '**/*$ViewInjector*.*', '**/BuildConfig.*', '**/Manifest*.*']),
+            fileTree(
+                    dir: "${project.buildDir}/tmp/kotlin-classes/wyndDebug",
+                    excludes: ['**/R.class', '**/R$*.class', '**/*$ViewInjector*.*', '**/BuildConfig.*', '**/Manifest*.*'])
+    )
+    def coverageSourceDirs = [
+            "src/main/java",
+            "src/main/kotlin"
+    ]
+    additionalSourceDirs.from = files(coverageSourceDirs)
+    sourceDirectories.from = files(coverageSourceDirs)
+    executionData.from = files("${project.buildDir}/jacoco/${testTaskName}.exec")
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
