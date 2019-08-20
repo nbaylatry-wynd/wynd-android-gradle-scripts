@@ -1,0 +1,27 @@
+def artifactId = project.modulePrefix + project.name
+sonarqube {
+    properties {
+        property "sonar.host.url", sonarUrl
+        property "sonar.projectKey", artifactId
+        property "sonar.projectName", artifactId
+        property "sonar.projectVersion", project.versionName
+        property "sonar.login", sonarUsername
+        property "sonar.password", sonarPassword
+
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.sources", "src/main/java,src/main/res,src/main/kotlin"
+        property "detekt.sonar.kotlin.config.path", "default-detekt-config.yml"
+        property "sonar.binaries", "${project.buildDir}/intermediates/javac/wyndDebug,${project.buildDir}/tmp/kotlin-classes/wyndDebug"
+        property "sonar.java.binaries", "${project.buildDir}/intermediates/javac/wyndDebug,${project.buildDir}/tmp/kotlin-classes/wyndDebug"
+        property "sonar.exclusions", "${project.buildDir}/**,**/*.png,*.iml, **/*generated*, "
+
+        property "sonar.scm.provider", "git"
+
+        property "sonar.java.test.binaries", "${project.buildDir}/intermediates/javac/wyndDebug,${project.buildDir}/tmp/kotlin-classes/wyndDebugUnitTest"
+
+        property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/testWyndDebugUnitTestCoverage/testWyndDebugUnitTestCoverage.xml"
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.junit.reportsPath", "${project.buildDir}/test-results/testWyndDebugUnitTest"
+        property "sonar.android.lint.report", "${project.buildDir}/reports/lint-results-debug.xml"
+    }
+}
